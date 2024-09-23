@@ -1,0 +1,9 @@
+# Client-specific ignores
+MarketplaceClient/node_modules
+MarketplaceClient/.next/
+MarketplaceClient/out/
+MarketplaceClient/*.tsbuildinfo
+
+# Miscellaneous
+MarketplaceClient/.DS_Store
+MarketplaceClient/.env*.local
