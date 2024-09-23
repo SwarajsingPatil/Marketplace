@@ -1,11 +1,11 @@
 'use client'
 import Modal from "./Modal"
 import { useState } from "react"
-import useLoginModal from "@/app/hooks/useLoginModal"
+import useSignupModal from "@/app/hooks/useSignUpModal"
 import CustomButton from "../forms/CustomButton"
 
-const LoginModal = () => {
-const loginModal = useLoginModal()
+const SignupModal = () => {
+const signupModal = useSignupModal()
 
     const content = (
         <>
@@ -15,6 +15,7 @@ const loginModal = useLoginModal()
                 <input placeholder="Your email address" type="email" className="w-full px-4 h-[54px] border border-gray-300 rounded-xl" />
                 
                 <input placeholder="Your password" type="password" className="w-full px-4 h-[54px] border border-gray-300 rounded-xl" />
+                <input placeholder="Confirm password" type="password" className="w-full px-4 h-[54px] border border-gray-300 rounded-xl" />
                 
                 <div className="p-5 text-red-700 rounded-xl opacity-80">
                     yooo
@@ -30,12 +31,12 @@ const loginModal = useLoginModal()
 
     return (
         <Modal
-            isOpen={loginModal.isOpen}
-            close={loginModal.close}
-            label="Log in"
+            isOpen={signupModal.isOpen}
+            close={signupModal.close}
+            label="Sign up"
             content={content}
         />
     )
 }
 
-export default LoginModal
+export default SignupModal
