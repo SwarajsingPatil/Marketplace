@@ -7,3 +7,6 @@ MarketplaceClient/*.tsbuildinfo
 # Miscellaneous
 MarketplaceClient/.DS_Store
 MarketplaceClient/.env*.local
+
+
+Backend/djangobnb_backend/env
