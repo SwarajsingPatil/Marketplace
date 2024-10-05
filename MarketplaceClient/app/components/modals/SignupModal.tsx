@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import useSignupModal from "@/app/hooks/useSignUpModal"
 import CustomButton from "../forms/CustomButton"
+import apiService from "@/app/services/apiService"
 
 const SignupModal = () => {
     const router = useRouter()
@@ -13,11 +14,39 @@ const SignupModal = () => {
     const [password2, setPassword2] = useState('')
     const [errors, setErrors] = useState<string[]>([])
 
+    const submitSignup = async () => {
+        const formData = {
+            email: email,
+            password1: password,
+            password2: password2
+        }
+
+        const response = await apiService.post('/api/auth/register/', JSON.stringify(formData))
+        
+        if (response.access){
+
+            signupModal.close()
+
+            router.push('/')
+        }else{
+            const tmpErrors: string[] = Object.values(response).map((error: any) => {
+                return error
+            })
+
+            setErrors(tmpErrors)
+        }
+
+    }
+
+
     const content = (
         <>
             {/* <h2 className="mb-6 text-2xl">Welcome to marketplace, please log in</h2> */}
 
-            <form className="space-y-4" action="">
+            <form 
+            action={submitSignup}
+            className="space-y-4"
+            >
                 <input onChange={(e) => setEmail(e.target.value)} placeholder="Your email address" type="email" className="w-full px-4 h-[54px] border border-gray-300 rounded-xl" />
                 
                 <input onChange={(e) => setPassword(e.target.value)} placeholder="Your password" type="password" className="w-full px-4 h-[54px] border border-gray-300 rounded-xl" />
@@ -37,7 +66,7 @@ const SignupModal = () => {
 
                 <CustomButton
                 label="Log in" 
-                onClick={() => console.log('test')}
+                onClick={submitSignup}
                 />
             </form>
         </>
