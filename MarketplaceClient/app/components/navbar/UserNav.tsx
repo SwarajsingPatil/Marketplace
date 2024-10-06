@@ -4,8 +4,16 @@ import MenuLink from "./MenuLink"
 import useLoginModal from "@/app/hooks/useLoginModal"
 import useSignupModal from "@/app/hooks/useSignUpModal"
 import { useState } from "react"
+import LogoutButton from "../LogoutButton"
 
-const UserNav= () => {
+
+interface UserNavProps{
+    userId?: string | null
+}
+
+const UserNav:React.FC<UserNavProps> = ({
+    userId
+}) => {
     const loginModal = useLoginModal()
     const signupModal = useSignupModal()
     const [isOpen,setisOpen] = useState(false)
@@ -29,21 +37,27 @@ const UserNav= () => {
 
             {isOpen && (
                 <div className="w-[220px] absolute top-[60px] right-0 bg-white border rounded-xl border shadow-md flex flex-col cursor-pointer overflow-hidden">
-                    <MenuLink
-                    onClick={()=> {
-                        setisOpen(false)
-                        loginModal.open()
-                    }}
-                    label='Log in' 
-                    />
+                    {userId ? (
+                    <LogoutButton /> 
+                    ) : (
+                        <>
+                            <MenuLink
+                                onClick={()=> {
+                                    setisOpen(false)
+                                    loginModal.open()
+                                    }}
+                                    label='Log in' 
+                            />
 
-                    <MenuLink
-                    onClick={()=> {
-                        setisOpen(false)
-                        signupModal.open()
-                    }}
-                    label='Sign up' 
-                    />
+                            <MenuLink
+                                onClick={()=> {
+                                setisOpen(false)
+                                signupModal.open()
+                                }}
+                                label='Sign up' 
+                            />
+                        </>
+                    )}
                 </div>
             )}
         </div>
