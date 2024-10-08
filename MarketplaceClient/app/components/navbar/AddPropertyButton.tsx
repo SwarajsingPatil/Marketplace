@@ -1,8 +1,17 @@
+'use client'
+
 import useAddPropertyModal from "@/app/hooks/useAddPropertyModal"
+import AddPropertyModal from "../modals/AddPropertyModal"
 
 const AddPropertyButton = () =>{
+    const addPropertyModal = useAddPropertyModal()
+    const airbnbYourHome = () => {
+        addPropertyModal.open()
+    }
     return(
-        <div className="p-2 cursor-pointer text-sm font-semibold rounded-full hover:bg-gray-200">
+        <div 
+        onClick={airbnbYourHome}
+        className="p-2 cursor-pointer text-sm font-semibold rounded-full hover:bg-gray-200">
             Marketplace your Home
         </div>
     )
