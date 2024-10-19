@@ -81,11 +81,17 @@ const AddPropertyModal = () => {
             if (response.success) {
                 console.log('SUCCESS :-D');
 
-                router.push('/');
+                router.push('/?added=true');
 
                 addPropertyModal.close();
             } else {
                 console.log('Error');
+
+                const tmpErrors: string[] = Object.values(response).map((error: any) => {
+                    return error;
+                })
+
+                setErrors(tmpErrors)
             }
         }
     }
